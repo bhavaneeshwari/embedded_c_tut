@@ -1,3 +1,40 @@
+### Calculate Array Sum Using Only Pointers
+You are given an array of integers and its size n.
+Using only pointer arithmetic:
+
+Traverse the array
+Find and print the sum of all elements.
+```c
+#include <stdio.h>
+
+int calculate_sum(int *ptr, int n) {
+    int sum =0;
+    for (int i =0; i<n;i++)
+    {
+        sum+=*(ptr+i);
+    }
+    return sum;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int arr[100];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int result = calculate_sum(arr, n);
+    printf("%d", result);
+
+    return 0;
+}
+
+Solving Approa
+```
+
+
 ### Print Sum of Even Numbers
 You are given an array of integers and its size. Using only pointer arithmetic:
 
