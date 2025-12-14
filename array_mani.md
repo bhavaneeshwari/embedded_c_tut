@@ -175,3 +175,32 @@ int main() {
     return 0;
 }
 ```
+###  Sliding Window Sum
+You are given an array of integers and a window size k. Your task is to calculate the sum of each window of size k as it slides across the array from left to right.
+
+Return all window sums in a single line, separated by space.
+
+```c
+#include <stdio.h>
+
+void sliding_window_sum(int arr[], int n, int k) {
+    // Your logic here
+   
+    for (int i =0;i<n-k+1;i++)
+    {    int sum=0;
+        for (int j =i;j<i+k;j++)
+        {sum += arr[j];}
+     printf("%d ",sum);
+     
+    }
+}
+
+int main() {
+    int n, k, arr[100];
+    scanf("%d %d", &n, &k);
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+
+    sliding_window_sum(arr, n, k);
+    return 0;
+}
+```
