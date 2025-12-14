@@ -86,3 +86,59 @@ int main() {
     return 0;
 }
 ```
+
+###  Left Rotate Array by K Positions
+You are given an array of size n and an integer k. Rotate the array left by k positions, in-place (without using any extra array).
+
+This means the elements that go beyond the first k positions should wrap around to the end.
+
+```c
+#include <stdio.h>
+
+void rotate_array(int arr[],int n)
+{
+    int start =0;
+    int end =n-1;
+    int temp=0;
+    while(end>start)
+    {   temp=arr[start];
+        arr[start]=arr[end];
+        arr[end]=temp;
+        start++;
+        end--;
+    }
+}
+void rotate_left(int arr[], int n, int k) {
+    // Your logic here
+int k1=k%n;// for wrap around condt
+rotate_array(arr,k1);//rotate upto k
+rotate_array(arr,n);//rotate the whole 
+rotate_array(arr,n-k1);
+
+}
+
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+
+    int arr[100];
+
+    // Read array elements
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Rotate the array
+    rotate_left(arr, n, k);
+
+    // Print the rotated array
+    for (int i = 0; i < n; i++) {
+        printf("%d", arr[i]);
+        if(i < n-1){
+        	printf(" ");
+        }
+    }
+
+    return 0;
+}
+```
