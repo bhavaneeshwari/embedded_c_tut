@@ -49,3 +49,38 @@ int main() {
     return 0;
 }
 ```
+
+###  Union Extract Bytes from a 32-bit Value
+Your task is to:
+
+Use a union that overlays a uint32_t value with a 4-byte uint8_t array
+Read a 32-bit unsigned integer input
+Print its 4 individual bytes in little-endian order (i.e., LSB first)
+Assume the program runs on a little-endian machine.
+Use only union access, no bit masking or shifts.
+
+```c
+#include <stdio.h>
+#include <stdint.h>
+
+typedef union {
+    uint32_t value;
+    uint8_t bytes[4];
+} Register;
+
+// Write logic here to extract bytes using union
+void print_bytes(uint32_t input) {
+    // Your code here
+    Register R;
+    R.value =input;
+    printf("%d %d %d %d",R.bytes[0],R.bytes[1],R.bytes[2],R.bytes[3]);
+    
+}
+
+int main() {
+    uint32_t num;
+    scanf("%u", &num);
+    print_bytes(num);
+    return 0;
+}
+```
