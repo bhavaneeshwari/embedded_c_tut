@@ -84,3 +84,16 @@ int main() {
     return 0;
 }
 ```
+### Modify Bytes in a 32-bit Value Using Union
+You are given a 32-bit integer.
+
+You must:
+
+Use a union to access and modify its individual bytes
+Modify the 2nd and 3rd bytes (i.e., bytes[1] and bytes[2]) with new values
+Reconstruct and print the modified 32-bit value
+Only use union-based access. Do not use bitwise operations or shifts.
+
+```c
+
+```
