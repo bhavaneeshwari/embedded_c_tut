@@ -1,127 +1,51 @@
-A union is a special data structure where all members share the same memory location.
+### Control Register Using Nested Bitfields
+You are given a control register represented using nested struct bitfields. The register is 8-bit wide and divided into the following layout:
 
-It allows we to store data in one form and access it in another, without conversions.
+Bits	Field	Description
+0	enable	1 = ON, 0 = OFF
+1	mode	0 = Normal, 1 = Sleep
+2–3	priority	2-bit value (0–3)
+4–7	reserved	Reserved (must be 0)
 
-union Example {
-    uint32_t num;
-    uint8_t bytes[4];
-};Copy
-In this example, num and bytes occupy the same 4 bytes of memory.
+Your task is to:
 
-Why Use Unions in Firmware?
-Unions are widely used in embedded firmware to:
+Simulate this register using nested struct and bitfields
+Implement a function that takes a pointer to the register and validates:
+enable must be 1
+priority must be less than or equal to 2
+reserved must be all 0s
+Return 1 if valid, else return 0.
 
-Use Case	Example
-Access individual bytes of a register	Transmitting 32-bit values as 4 bytes
-Overlay structured fields on raw buffers	Parse sensor or protocol frames
-Serialize/deserialize data to/from byte streams	UART, SPI, I2C communication
-Interpret float as 4 raw bytes	Sending float over network or UART
- 
-
-Key Concept: Memory Reinterpretation
-we can write to one member of the union and read from another:
-
-union Data {
-    float f;
-    uint8_t bytes[4];
-};
-
-union Data d;
-d.f = 3.14;
-
-// Now d.bytes contains raw byte representation of floatCopy
-Important: No memory is copied. This is just a reinterpretation of the same bytes.
-
- 
-
-Common Union Patterns in Firmware
-1. Extract Bytes from a 32-bit Value
-
-union {
-    uint32_t value;
-    uint8_t bytes[4];
-} reg;
-
-reg.value = 0x12345678;
-// reg.bytes[0] = 0x78 (LSB), reg.bytes[3] = 0x12 (MSB)Copy
-Useful in:
-
-Sending 32-bit data over 8-bit UART
-Writing data into memory-mapped buffers
-2. Modify Specific Bytes
-
-reg.bytes[0] = 0xAB;  // Modify LSB
-reg.bytes[3] = 0xCD;  // Modify MSBCopy
-Updates the overall reg.value automatically.
-
-3. Overlay Struct on Union (Packet Layout)
-
-union Packet {
-    struct {
-        uint8_t header;
-        uint8_t length;
-        uint8_t payload[2];
-        uint8_t checksum;
-    };
-    uint8_t raw[5];
-};Copy
-we can fill fields via struct and transmit raw[ ], or receive raw[ ] and access fields via struct.
-
-4. Decode Bitfields from ADC or Status Register
+ ```c
+#include <stdio.h>
 
 typedef union {
-    uint16_t raw;
+    unsigned char reg;
     struct {
-        uint16_t data : 12;
-        uint16_t gain : 2;
-        uint16_t ready : 1;
-        uint16_t error : 1;
+        unsigned char enable : 1;
+        unsigned char mode : 1;
+        unsigned char priority : 2;
+        unsigned char reserved : 4;
     } bits;
-} ADC_Result;
+} ControlRegister;
 
-ADC_Result res;
-res.raw = 0x8D4E;Copy
-We can access res.bits.gain or res.bits.data directly, like register view.
+// Write your logic here
+int validate_register(ControlRegister *ctrl) {
 
-5. Transmit Float as Bytes
+    ControlRegister res=*ctrl;
+    if ((res.bits.enable == 1)&&(res.bits.priority<=2)&&(res.bits.reserved==0))
+   { return 1;}
+    else {return 0;}
+    
+}
 
-union {
-    float f;
-    uint8_t b[4];
-} tx;
+int main() {
+    ControlRegister ctrl;// typedef union and its object to store the value in reg
+    scanf("%hhx", &ctrl.reg);
 
-tx.f = 2.718;
-// Now send tx.b[0..3] over UARTCopy
- 
+    int result = validate_register(&ctrl);// address of the the union;
+    printf("%d", result);
 
-Struct vs Union — Key Difference
-Struct: All members occupy separate memory — total size is the sum of all members (plus padding).
-Union: All members share the same memory — total size is equal to the size of the largest member.
-Example:
-
-struct S {
-    uint32_t a;   // 4 bytes
-    uint8_t  b;   // 1 byte
-}; // Likely size = 8 (due to padding)
-
-union U {
-    uint32_t a;   // 4 bytes
-    uint8_t  b;   // shares with a
-}; // Size = 4
-Copy
-Union Firmware Relevance
-Where It Helps	How
-Low-level communication	Convert structured data to raw byte stream
-Compact control register design	Access fields and bytes efficiently
-Protocol simulation	Interpret packets by field
-Debugging / Analysis	Byte-level inspection of float/int
-Buffer-safe conversion	No memcpy needed
- 
-
-Common Pitfalls
-Mistake	Fix
-❌ Assuming order of bytes is same across systems (endianness)	Use endian-aware handling
-❌ Accessing wrong member after overwrite	Always ensure which member was last written
-❌ Using union across different compilers	Compiler-specific behavior in padding/bit order (document  format)
-✅ Use unions for reinterpretation, not logic computation	 
-✅ Always check sizeof(union) if using in communication	 
+    return 0;
+}
+```
