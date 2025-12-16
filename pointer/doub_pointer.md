@@ -1,3 +1,5 @@
+
+https://zakuarbor.github.io/blog/double-pointers/
 Before I can delve into the use case of double pointers, it’s best to refresh your minds on what a double pointer is. If you already have an understanding of how double pointers work, you can safely pass this section. Based on the name itself, we can infer that it involves the use of two pointers. A double pointer is a pointer to another pointer. We know a pointer is a data type that stores some address as its value. Therefore, a double pointer is a data type where it stores an address of another pointer which itself points to another address in memory. Sounds confusing, doesn’t it. It makes more sense if we see a diagram of how this works:
 
 a diagram displaying a high overview of how a pointer and a double pointer work
