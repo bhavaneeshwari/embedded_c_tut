@@ -170,3 +170,28 @@ int main() {
     return 0;
 }
 ```
+### Bit Spreading Interleave Bits with Zeros
+```c #include <stdio.h>
+#include <stdint.h>
+
+// Spread bits with 0s between them (interleave into 16-bit)
+uint16_t spread_bits(uint8_t val) {
+    uint16_t result = 0;
+
+    for (int i = 0; i < 8; i++) {
+        uint8_t bit = (val >> i) & 1;           // Extract i-th bit
+        result |= (bit << (2 * i));             // Place in 2*i position
+    }
+
+    return result;
+}
+
+int main() {
+    uint8_t val;
+    scanf("%hhu", &val);
+
+    uint16_t result = spread_bits(val);
+    printf("%u", result);
+    return 0;
+}
+```
