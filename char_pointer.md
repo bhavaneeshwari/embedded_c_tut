@@ -68,3 +68,5 @@ This maps low-level binary data to user-meaningful outputs
 Print the corresponding name only if bit = 1
 
  
+### Because %u stands for "unsigned", it well may be uint64_t and is architecture dependent. According to man 3 printf, you may want to use length modifier to get sought behaviour, i.e. %hu (uint16_t) and %hhu (uint8_t).
+
