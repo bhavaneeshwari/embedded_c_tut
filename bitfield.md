@@ -31,3 +31,39 @@ int main() {
     return 0;
 }
 ```
+### 15. Set Multiple Bits in 8-bit Register
+You are given an 8-bit register. Set all bits between position start and end (inclusive).
+
+Use 0-based indexing and assume start <= end.
+
+
+Example 1
+
+Input: reg = 0b00000000, start = 1, end = 3 
+Output: 0b00001110Copy
+ ```c
+#include <stdio.h>
+#include <stdint.h>
+
+uint8_t set_range(uint8_t reg, uint8_t start, uint8_t end) {
+    // Your code here
+    
+        for (int i =0;i<=end-start;i++){
+         reg |= (1<< start+i);
+        }
+     
+    
+    
+    return reg;
+}
+
+int main() {
+    uint8_t reg, start, end;
+    scanf("%hhu %hhu %hhu", &reg, &start, &end);
+    printf("%u", set_range(reg, start, end));
+    return 0;
+}
+```
+
+## The C expression uint8_t mask = ((1 << (end - start + 1)) - 1) << start; generates a bitmask within an 8-bit unsigned integer type with a contiguous sequence of 1s between the bit positions specified by start and end, inclusive.
+<img width="913" height="684" alt="image" src="https://github.com/user-attachments/assets/b29056c1-5a62-400f-9a04-b4680520a3b8" />
