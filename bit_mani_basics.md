@@ -26,14 +26,17 @@ int x = y^1; // toggles the lsb bit
 ### bitwise not 
 As an aside, it is interesting to note that for any integer x, ~x is the same as -x-1.
 <img width="492" height="272" alt="image" src="https://github.com/user-attachments/assets/794384a5-a5cb-44d4-a5e6-dc27880d77fc" />
-### bitwise shift 
+
 
 <img width="1555" height="581" alt="image" src="https://github.com/user-attachments/assets/9e7cf037-380f-4b73-93cb-63b1567ec9bf" />
+### bitwise shift 
+
 <img width="1715" height="831" alt="image" src="https://github.com/user-attachments/assets/5068930f-face-4096-b43e-196f3d0e0235" />
+```c
+int a = 5;        // binary: 0000000000000101
+    int b = a << 14;  // binary: 0100000000000000 - the first 1 in 101 was discarded
 
-
-
-
+```
 
 ### unsigned chars as the data type which can store numbers from 0 - 255. The %hhu format specifier is for unsigned chars:
 An unsigned char is guaranteed to store a non-negative value from 0 to 255.
