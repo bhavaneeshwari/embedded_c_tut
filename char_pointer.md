@@ -19,3 +19,52 @@ void print_strings(char *list_of_strings[]) { /* ... */ }
 // is the same as
 void print_strings(char **list_of_strings) { /* ... */ }
 ```
+
+
+##  Decode Status Register into Human-Readable Flags
+```c
+#include <stdio.h>
+#include <stdint.h>
+
+const char *flag_names[8] = {
+    "Power On",
+    "Error",
+    "Tx Ready",
+    "Rx Ready",
+    "Overheat",
+    "Undervoltage",
+    "Timeout",
+    "Reserved"
+};
+
+void decode_status(uint8_t status_reg) {
+    for (int i = 0; i < 8; i++) {
+        if ((status_reg >> i) & 1) {
+            printf("%s\n", flag_names[i]);
+        }
+    }
+}
+
+int main() {
+    uint8_t reg;
+    scanf("%hhu", &reg);
+    decode_status(reg);
+    return 0;
+}
+```
+What is this about?
+
+You’re decoding an 8-bit status register, where each bit tells you whether a system condition is active — like flags from a sensor or peripheral.
+
+Why it’s important in firmware?
+
+Many peripherals return status in register bits
+Developers need to interpret bit-level feedback quickly
+This maps low-level binary data to user-meaningful outputs
+## Solution Logic
+
+# Use a lookup table (flag_names[])
+# Shift each bit to LSB, check if set  (status_reg >> i) & 1
+Print the corresponding name only if bit = 1
+
+ 
