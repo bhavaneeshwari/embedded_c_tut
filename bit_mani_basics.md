@@ -1,3 +1,4 @@
+#  Bitwise operators, however, only make sense when thinking of number in binary.
 ## the ability to manipulate individual bits will become useful or even necessary
 
 Saving memory by packing up to 8 true/false data values in a single byte.
@@ -32,10 +33,11 @@ As an aside, it is interesting to note that for any integer x, ~x is the same as
 ### bitwise shift 
 
 <img width="1715" height="831" alt="image" src="https://github.com/user-attachments/assets/5068930f-face-4096-b43e-196f3d0e0235" />
-```c
-int a = 5;        // binary: 0000000000000101
-    int b = a << 14;  // binary: 0100000000000000 - the first 1 in 101 was discarded
 
+```c
+
+    int a = 5;        // binary: 0000000000000101
+    int b = a << 14;  // binary: 0100000000000000 - the first 1 in 101 was discarded
 ```
 
 ### unsigned chars as the data type which can store numbers from 0 - 255. The %hhu format specifier is for unsigned chars:
