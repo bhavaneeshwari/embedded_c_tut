@@ -45,4 +45,56 @@ An unsigned char is guaranteed to store a non-negative value from 0 to 255.
 A signed char is guaranteed to store a value in the range from -128 to 127.
 ##  8-bit integer (0-255)
 ### declare the variable as unsigned char 
+### testing a bit 
+```c
+int test_bit(unsigned int value, int bit_number) {
+    unsigned int mask = 1 << bit_number;
 
+    if ((value & mask) == 0) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+```
+### to print decimal number to binary number 
+ ```c
+ unsigned int value;
+
+    /* test testing a bit */
+    printf("Enter a number: ");
+    scanf("%d", &value);
+    for (int i = 31; i >= 0; i--) {
+        printf("%d", test_bit(value, i));
+    }
+    printf("\n");
+```
+### Setting a Bit
+Likewise, can we write a function to set a given bit in a number, and make it 1?
+```c
+void set_bit(unsigned int* value, int bit_number) {
+    unsigned int mask = 1 << bit_number;
+    *value = *value | mask;
+}
+```
+
+ 
+### Clearing a Bit
+How could we clear a bit which would set it to zero?
+```c
+void clear_bit(unsigned int* value, int bit_number) {
+    unsigned int mask = ~(1 << bit_number);
+    *value = *value & mask;
+}
+```
+
+ 
+### Flipping a Bit
+Here we want to flip, or invert a single bit in a number. How can we do that?
+```c
+void flip_bit(unsigned int* value, int bit_number) {
+    unsigned int mask = 1 << bit_number;
+    *value = *value ^ mask;
+}
+These functions can be found in bits.c.
+```
