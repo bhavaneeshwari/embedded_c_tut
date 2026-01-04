@@ -67,7 +67,8 @@ int main() {
 }
 ```
 
-## ```c
+##  alternate 
+```c
 uint32_t mask = ((1U << len) - 1) << pos;
     reg &= ~mask;
 
