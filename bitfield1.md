@@ -75,3 +75,78 @@ uint32_t mask = ((1U << len) - 1) << pos;
     // Step 2: Shift the new value and OR it into position
     reg |= (val & ((1U << len) - 1)) << pos;
 ```
+
+## 19. Extract Even Bits Only from 32-bit Register
+From a 32-bit register, extract all even-positioned bits (0, 2, 4, …, 30).
+Return the compressed value formed by only these bits (shifted to be consecutive).
+
+
+Example 1
+
+Input: reg = 0b0101 0101 
+Output: 0b1111
+
+```c
+#include <stdio.h>
+#include <stdint.h>
+
+uint32_t extract_even_bits(uint32_t reg) {
+    // Your code here
+    uint32_t new_t=0;
+ 
+    for (int i =0;i<16;i++)
+
+    {    int pos = i*2;
+      
+       uint32_t out =  (reg>>pos)&1;
+      
+        new_t |= out<<i;
+    }
+
+    return new_t;
+}
+
+int main() {
+    uint32_t reg;
+    scanf("%u", &reg);
+    printf("%u", extract_even_bits(reg));
+    return 0;
+}
+```
+
+## 20. Set Baud Rate Field in Control Register
+You are working with a 32-bit UART control register. The baud rate is controlled by 4 bits located at position 8 (i.e., bits 8 to 11). 
+Write a function to update the baud rate field with a new 4-bit value. All other bits in the register must remain unchanged.
+
+
+Example 1
+
+Input: reg = 0b0000 0000 0000 0000 0000 0000 0000 0000, baud = 0b1010  
+Output: 0b0000 0000 0000 0000 0000 1010 0000 0000
+
+```c
+#include <stdio.h>
+#include <stdint.h>
+
+uint32_t set_baud_rate(uint32_t reg, uint8_t baud) {
+    // Your code here
+
+    uint32_t mask =0;
+    mask = ((1U<<4)-1) <<8;
+    reg &= ~(mask);// clear 
+    uint32_t val =0;
+      val = val | baud ;
+      val<<=8;
+    reg |=val;
+
+    return reg;
+}
+
+int main() {
+    uint32_t reg;
+    uint8_t baud;
+    scanf("%u %hhu", &reg, &baud);
+    printf("%u", set_baud_rate(reg, baud));
+    return 0;
+}
+```
