@@ -126,6 +126,13 @@ uint8_t count_set_bits(uint8_t reg) {
      
     return res;
 }
+
+int main() {
+uint8_t reg;
+    scanf("%hhu", &reg);
+    printf("%u", count_set_bits(reg));
+    return 0;
+}
 ```
  ### 30. Check If a Number Is a Power of Two
 Write a function to check if a given positive integer is a power of 2. Do not use loops, multiplication, division, or library functions.
@@ -152,11 +159,5 @@ int main() {
     return 0;
 }
 
-Solving 
-int main() {
-uint8_t reg;
-    scanf("%hhu", &reg);
-    printf("%u", count_set_bits(reg));
-    return 0;
-}
+
 ```
