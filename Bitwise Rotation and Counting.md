@@ -126,7 +126,33 @@ uint8_t count_set_bits(uint8_t reg) {
      
     return res;
 }
+```
+ ### 30. Check If a Number Is a Power of Two
+Write a function to check if a given positive integer is a power of 2. Do not use loops, multiplication, division, or library functions.
+You must solve it using bitwise logic only.
+```c
+#include <stdio.h>
+#include <stdint.h>
 
+// Complete the function
+const char* is_power_of_two(uint32_t n) {
+    // Your logic here
+    if(n!=0 && (n&(n-1)) ==0)
+    return "YES";
+    else
+    return "NO";
+}
+
+int main() {
+    uint32_t n;
+    scanf("%u", &n);
+
+    const char* result = is_power_of_two(n);
+    printf("%s", result);
+    return 0;
+}
+
+Solving 
 int main() {
 uint8_t reg;
     scanf("%hhu", &reg);
