@@ -1,4 +1,5 @@
-### Set or Clear a Specific Bit in a Register
+# Bitwise Operations
+###1 Set or Clear a Specific Bit in a Register
 Write a C program to set or clear a specific bit in an 8-bit register based on user input.
 
 The user provides an 8-bit integer (register value), a bit position (0-7), and a mode (0 for clear, 1 for set).
@@ -42,7 +43,7 @@ int main() {
 }
 ```
 
-### Bit Toggle
+### 2 Bit Toggle
 Write a C program to toggle the 5th bit (0-based index) of a given integer.
 
 The program should take an integer N as input.
@@ -67,7 +68,7 @@ int main() {
 }
 ```
 
-### Check if K-th Bit is Set
+### 3 Check if K-th Bit is Set
 Write a C program to check if the K-th bit (0-based index) of an integer N is set (1) or not (0).
 
 Input Format
