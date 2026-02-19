@@ -161,3 +161,39 @@ int main() {
 
 
 ```
+### 31. Bit Reversal in an 8-bit Value
+You are given an 8-bit unsigned integer. Your task is to:
+
+Reverse the order of its bits
+Print the resulting 8-bit value (in decimal)
+You must not use any lookup table or standard library function. Use pure bitwise logic.
+```c
+#include <stdio.h>
+#include <stdint.h>
+
+
+uint8_t reverse_bits(uint8_t val) {
+    // Your logic here
+    uint8_t temp =0;
+    for (int i=0;i<8;i++)
+    {  
+        temp =  (temp <<1)| (val&1);
+         
+        val = val >>1;
+       
+    }
+ 
+    return  temp;
+}
+
+int main() {
+    uint8_t val;
+    scanf("%hhu", &val);
+
+    uint8_t result = reverse_bits(val);
+    printf("%u", result);
+    return 0;
+}
+```
+
+
