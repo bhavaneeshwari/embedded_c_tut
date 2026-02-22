@@ -196,4 +196,38 @@ int main() {
 }
 ```
 
+### 32. Compress Interleaved Bits Reverse Bit Spreading
+In the previous problem, we interleaved an 8-bit number into a 16-bit value by inserting 0s between each bit. Now your task is to:
+
+Reverse the interleaving process
+Extract only the bits from even-numbered positions in a 16-bit number
+Reconstruct the original 8-bit value
+
+ ```c
+#include <stdio.h>
+#include <stdint.h>
+
+uint8_t compress_bits(uint16_t val) {
+    // Your logic here
+    uint8_t res;
+    for(int i =0;i<8;i++)
+    {
+        uint8_t temp=0;
+         temp |= (val>>(2*i))&1;
+        res |= temp<<i;
+    }
+    return res;
+}
+
+int main() {
+    uint16_t val;
+    scanf("%hu", &val);
+
+    uint8_t result = compress_bits(val);
+    printf("%u", result);
+    return 0;
+}
+
+Solving Appro
+```
 
